@@ -1,0 +1,55 @@
+.body {
+    margin: 7162px;
+    margin-top: 1440px;
+    margin-bottom: 30px;
+}
+
+.Line-4 {
+    width: 186px;
+    height: 2px;
+    margin: 50.8px 48.5px 2px 12.5px;
+    background-color: #e03116;
+}
+
+.a {
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    letter-spacing: -0.29px;
+    float: right;
+}
+
+.b {
+    margin: 37px 24px 152px 85.5px;
+    width: 273px;
+    height: 33px;
+    margin: 0 0 7px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: -0.19px;
+    color: #1f2c40;
+    float: auto;
+}
+
+.c {
+    width: 273px;
+    height: 89px;
+    margin: 0 0 7px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: -0.19px;
+    text-align: left;
+    color: #1f2c40;
+    float: right;
+}
+
+.container {
+    width: 960px;
+    padding: 10px;
+}
