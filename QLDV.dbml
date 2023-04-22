@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QUANLYDOANVIEN" Class="QLDVDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ASUS;Initial Catalog=QUANLYDOANVIEN;Integrated Security=True" SettingsObjectName="QL_DoanVien.Properties.Settings" SettingsPropertyName="QUANLYDOANVIENConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Huyen" Member="Huyens">
+    <Type Name="Huyen">
+      <Column Name="MaHuyen" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHuyen" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="MaTinh" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Huyen_Xa" Member="Xas" ThisKey="MaHuyen" OtherKey="MaHuyen" Type="Xa" />
+      <Association Name="Tinh_Huyen" Member="Tinh" ThisKey="MaTinh" OtherKey="MaTinh" Type="Tinh" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Khoa" Member="Khoas">
+    <Type Name="Khoa">
+      <Column Name="MaKhoa" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKhoa" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Khoa_NganhHoc" Member="NganhHocs" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="NganhHoc" />
+      <Association Name="Khoa_User" Member="Users" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lop" Member="Lops">
+    <Type Name="Lop">
+      <Column Name="MaLop" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLop" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MaNganh" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Lop_Student" Member="Students" ThisKey="MaLop" OtherKey="MaLop" Type="Student" />
+      <Association Name="NganhHoc_Lop" Member="NganhHoc" ThisKey="MaNganh" OtherKey="MaNganh" Type="NganhHoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhoaHoc" Member="KhoaHocs">
+    <Type Name="KhoaHoc">
+      <Column Name="MaKH" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKH" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NganhHoc" Member="NganhHocs">
+    <Type Name="NganhHoc">
+      <Column Name="MaNganh" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNganh" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MaKhoa" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="NganhHoc_Lop" Member="Lops" ThisKey="MaNganh" OtherKey="MaNganh" Type="Lop" />
+      <Association Name="Khoa_NganhHoc" Member="Khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="Khoa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Permission" Member="Permissions">
+    <Type Name="Permission">
+      <Column Name="MaPMS" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenPMS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Permission_PhanQuyen" Member="PhanQuyens" ThisKey="MaPMS" OtherKey="MaPMS" Type="PhanQuyen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="MaRole" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenRole" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_PhanQuyen" Member="PhanQuyens" ThisKey="MaRole" OtherKey="MaRole" Type="PhanQuyen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PhanQuyen" Member="PhanQuyens">
+    <Type Name="PhanQuyen">
+      <Column Name="MaRole" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPMS" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Role_PhanQuyen" Member="Role" ThisKey="MaRole" OtherKey="MaRole" Type="Role" IsForeignKey="true" />
+      <Association Name="Permission_PhanQuyen" Member="Permission" ThisKey="MaPMS" OtherKey="MaPMS" Type="Permission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Students">
+    <Type Name="Student">
+      <Column Name="MaSV" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NgayVaoDoan" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DienThoai" Type="System.String" DbType="Char(14)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChucVu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoDoan" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SinhHoat" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DoanPhi" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaLop" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaXa" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaKH" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Lop_Student" Member="Lop" ThisKey="MaLop" OtherKey="MaLop" Type="Lop" IsForeignKey="true" />
+      <Association Name="Xa_Student" Member="Xa" ThisKey="MaXa" OtherKey="MaXa" Type="Xa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tinh" Member="Tinhs">
+    <Type Name="Tinh">
+      <Column Name="MaTinh" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenTinh" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Tinh_Huyen" Member="Huyens" ThisKey="MaTinh" OtherKey="MaTinh" Type="Huyen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="MaUser" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MaKhoa" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaRole" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Khoa_User" Member="Khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="Khoa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Xa" Member="Xas">
+    <Type Name="Xa">
+      <Column Name="MaXa" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenXa" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="MaHuyen" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Xa_Student" Member="Students" ThisKey="MaXa" OtherKey="MaXa" Type="Student" />
+      <Association Name="Huyen_Xa" Member="Huyen" ThisKey="MaHuyen" OtherKey="MaHuyen" Type="Huyen" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
